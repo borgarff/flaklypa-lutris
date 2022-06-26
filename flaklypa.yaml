@@ -1,0 +1,29 @@
+name: Flaklypa
+game_slug: flaklypa
+version: Installer
+slug: flaklypa-installer
+runner: wine
+
+script:
+  files:
+    - game: N/A:Select the setup file"setup.exe"
+    - game_crack: N/A:Select the crack file "FGP.exe"
+  game:
+    arch: win32
+    exe: "$GAMEDIR/drive_c/Program Files/FGP/FGP.exe"
+    prefix: $GAMEDIR
+  installer:
+  - task:
+      arch: win32
+      description: Creating WINE prefix...
+      name: create_prefix
+      prefix: $GAMEDIR
+  - task:
+      arch: win32
+      description: Installing Flaklypa
+      executable: game
+      name: wineexec
+      prefix: $GAMEDIR
+  - move:
+      src: game_crack
+      dst: $GAMEDIR/drive_c/Program Files/FGP/FGP.exe
